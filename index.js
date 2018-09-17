@@ -302,9 +302,63 @@ client.on('message',(message)=>{
 				dispatcher.setVolume(number);
 				const embed = new Discord.RichEmbed()
 				.setTitle("Volume has been set to: "+number)
-				.setColor(0x00AE86)
+				.setColor(0x00AE86)				
 				message.channel.send({embed});
 			}
 		}
 	}
+});
+
+
+/* Remove something from the playlist */
+client.on('message',(message)=>{
+	if(message.content.startsWith('!remove')){
+		
+		var splitContent=message.content.split(/\s+/g);
+		
+		if(splitContent[1]){
+			var num=splitContent[1].trim();
+			console.log("Num: "+num); 
+			
+			if(num <= 0 || num > songQueueURL.length){
+				const embed = new Discord.RichEmbed()
+                                .setTitle("The queue number is invalid")
+                                .setColor(0xB63A3A)
+                                message.channel.send({embed});
+
+			}
+			else{
+				/* Remove the current playing */
+                             	var tempArraySong=new Array();
+                                var tempTitle=new Array();
+				var removedTitle;
+                                for(var i=0;i<songQueueURL.length;i++){
+					if(i!=(num-1)){
+						tempArraySong.push(songQueueURL[i]);
+                                                tempTitle.push(songQueueTitle[i]);
+                                        }
+					else{
+						console.log("here");
+						removedTitle=songQueueTitle[i];
+					}
+                                }
+
+                                songQueueURL=tempArraySong;
+                                songQueueTitle=tempTitle;
+
+				 const embed = new Discord.RichEmbed()
+                                .setTitle(removedTitle+" has been successfully removed!")
+                                .setColor(0x00AE86)
+                                message.channel.send({embed});
+
+			}
+		}
+	}
+});
+/* When the bot disconnects */
+client.on('disconnect',()=>{
+	console.log("The Bot has been disconnected.");
+	console.log("Trying to reconnect....");
+	client.connect();
+	
 });
