@@ -28,7 +28,7 @@ var ytdl=require('ytdl-core'); //To fetch the videos from youtube
 
 
 /* We login to the discord service with the given token */
-client.login('NDg5MDY1ODMwNDQxODExOTc5.DnqSdQ.i4Mb-CzKSLunqsepDhhSGBV9k_0');
+client.login('<API Key>');
 
 /* When the bot is ready */
 client.on('ready',()=>{
