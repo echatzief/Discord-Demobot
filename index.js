@@ -13,7 +13,7 @@ var dispatcher;
 var {google} =require('googleapis');
 var youtubeAPI=google.youtube({
 	version:'v3',
-	auth:'AIzaSyAwTEkSthr7S6OTApne9Jd9Qysfq3hVD5I'
+	auth:'<API key>'
 });
 
 console.log("Youtube API authentication has been made");
